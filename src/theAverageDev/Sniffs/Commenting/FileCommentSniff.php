@@ -8,7 +8,7 @@
  * @author     Luca Tumedei <luca@theaveragedev.com>
  * @copyright  2018 Luca Tumedei
  */
-namespace tad\CodingStandards\Sniffs\FileCommenting;
+namespace tad\CodingStandards\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
