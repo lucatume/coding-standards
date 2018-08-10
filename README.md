@@ -58,9 +58,13 @@ Set a custom `author` and `copyright` value for the rule:
 <ruleset name="MyProject">
     <description>My project coding standards.</description>
 
-    <rule ref="vendor/lucatume/coding-standards/src/theAverageDev/ruleset.xml">
-        <include name="theAverageDev.Commenting.FileComment" author="John Doe <john@doe.com>"/>
-    </rule>
+    <rule ref="vendor/lucatume/coding-standards/src/theAverageDev/ruleset.xml"/>
 
+    <rule ref="theAverageDev.Commenting.FileComment">
+        <properties>
+            <property name="authorName" value="John Doe"/>
+            <property name="authorEmail" value="john@doe.com"/>
+        </properties>
+    </rule>
 </ruleset>
 ```
