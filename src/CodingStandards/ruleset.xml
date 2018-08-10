@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<ruleset name="theAverageDev">
+    <description>theAverageDev custom coding standards for PHP Code Sniffer.</description>
+</ruleset>

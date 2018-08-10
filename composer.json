@@ -1,0 +1,21 @@
+{
+    "name": "lucatume/coding-standards",
+    "description": "A collection of my coding standards.",
+    "type": "library",
+    "require": {
+        "squizlabs/php_codesniffer": "^3.3"
+    },
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "theAverageDev (Luca Tumedei)",
+            "email": "luca@theaveragedev.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "tad\\CodingStandards": "src"
+        }
+    }
+}
