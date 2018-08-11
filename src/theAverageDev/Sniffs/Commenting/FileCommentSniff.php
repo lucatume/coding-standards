@@ -17,6 +17,16 @@ class FileCommentSniff implements Sniff
 {
 
 	/**
+	 * @var string
+	 */
+	public $authorName='Luca Tumedei';
+
+	/**
+	 * @var string
+	 */
+	public $authorEmail = 'luca@theaveragedev.com';
+
+	/**
 	 * A list of tokenizers this sniff supports.
 	 *
 	 * @var array
@@ -155,17 +165,19 @@ class FileCommentSniff implements Sniff
 			}
 
 			if ($name === '@author') {
-				if ($tokens[$string]['content'] !== 'Luca Tumedei <luca@theaveragedev.com>') {
-					$error = 'Expected "Luca Tumedei <luca@theaveragedev.com>" for author tag';
+				$author = sprintf('%s <%s>', $this->authorName, $this->authorEmail);
+				if ($tokens[$string]['content'] !== $author) {
+					$error = 'Expected "' . $author . '" for author tag';
 					$fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectAuthor');
 					if ($fix === true) {
-						$expected = 'Luca Tumedei <luca@theaveragedev.com>';
-						$phpcsFile->fixer->replaceToken($string, $expected);
+						$phpcsFile->fixer->replaceToken($string, $author);
 					}
 				}
 			} else if ($name === '@copyright') {
-				if (preg_match('/^([0-9]{4}) Luca Tumedei$/', $tokens[$string]['content']) === 0) {
-					$error = 'Expected "2018 Luca Tumedei" for copyright declaration';
+				$pattern = '/^([0-9]{4}) ' . preg_quote($this->authorName) . '$/';
+				$copyright = date('Y') . ' ' . $this->authorName;
+				if (preg_match($pattern, $tokens[$string]['content']) === 0) {
+					$error = 'Expected "' . $copyright . '" for copyright declaration';
 					$fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');
 					if ($fix === true) {
 						$matches = [];
@@ -174,7 +186,7 @@ class FileCommentSniff implements Sniff
 							$matches[1] = date('Y');
 						}
 
-						$expected = 'Luca Tumedei ' . $matches[1];
+						$expected = $matches[1] . ' ' . $this->authorName;
 						$phpcsFile->fixer->replaceToken($string, $expected);
 					}
 				}
