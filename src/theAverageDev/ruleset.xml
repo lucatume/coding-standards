@@ -108,8 +108,8 @@
     <!--file comments-->
     <rule ref="theAverageDev.Commenting.FileComment">
         <properties>
-            <property name="authorName" value="John Doe"/>
-            <property name="authorEmail" value="john@doe.com"/>
+            <property name="authorName" value="Luca Tumedei"/>
+            <property name="authorEmail" value="luca@theaveragedev.com"/>
         </properties>
     </rule>
 </ruleset>
