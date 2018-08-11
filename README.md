@@ -5,7 +5,7 @@ A collection of my coding standard modifications.
 ## Code Sniffer
 The `src/theAverageDev/Sniffs` folder contains a collection of sniffers I've modified or created to suit my needs and 
 preferences.  
-The `src/theAverageDev/ruleset.xml` contains my custom [PHP Code Sniffer](!g) configuration.
+The `src/theAverageDev/ruleset.xml` contains my custom [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) configuration.
 
 ### Installation
 Use [Composer](https://getcomposer.org/) to require the package:
@@ -33,6 +33,8 @@ Or include the rule in your project ruleset creating a `ruleset.xml` file like t
 ```
 
 ### Included PHP Code Sniffer Rules
+The standard includes rules from PSR1, PSR2, generic Code Sniffer standars, Squiz Labs and Zen.  
+Furthermore I've added some rules to suit my needs.
 
 #### File Comments
 Enforces my custom file comment rules.  
