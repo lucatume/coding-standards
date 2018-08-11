@@ -1,13 +1,14 @@
 <?php
 /**
- * A modification of the default Squiz Labs File Comment sniffer to suit
- * my needs.
+ * A modification of the default Squiz Labs File Comment sniffer to support
+ * custom author name and email.
  *
  * @package    theAverageDev
  * @subpackage CodingStandards
  * @author     Luca Tumedei <luca@theaveragedev.com>
  * @copyright  2018 Luca Tumedei
  */
+
 namespace theAverageDev\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
@@ -19,7 +20,7 @@ class FileCommentSniff implements Sniff
 	/**
 	 * @var string
 	 */
-	public $authorName='Luca Tumedei';
+	public $authorName = 'Luca Tumedei';
 
 	/**
 	 * @var string
@@ -36,18 +37,15 @@ class FileCommentSniff implements Sniff
 		'JS',
 	];
 
-
 	/**
-	 * Returns an array of tokens this test wants to listen for.
-	 *
-	 * @return array
-	 */
-	public function register()
-	{
+		 * Returns an array of tokens this test wants to listen for.
+		 *
+		 * @return array
+		 */
+	public function register() {
 		return [T_OPEN_TAG];
 
 	}//end register()
-
 
 	/**
 	 * Processes this test, when one of its tokens is encountered.
@@ -57,9 +55,9 @@ class FileCommentSniff implements Sniff
 	 *                                               in the stack passed in $tokens.
 	 *
 	 * @return int
+	 * phpcs:disable Generic.Metrics.CyclomaticComplexity Copied from original class
 	 */
-	public function process(File $phpcsFile, $stackPtr)
-	{
+	public function process(File $phpcsFile, $stackPtr) {
 		$tokens       = $phpcsFile->getTokens();
 		$commentStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
@@ -67,7 +65,7 @@ class FileCommentSniff implements Sniff
 			$phpcsFile->addError('You must use "/**" style comments for a file comment', $commentStart, 'WrongStyle');
 			$phpcsFile->recordMetric($stackPtr, 'File has doc comment', 'yes');
 			return ($phpcsFile->numTokens + 1);
-		} else if ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
+		} elseif ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT_OPEN_TAG) {
 			$phpcsFile->addError('Missing file doc comment', $stackPtr, 'Missing');
 			$phpcsFile->recordMetric($stackPtr, 'File has doc comment', 'no');
 			return ($phpcsFile->numTokens + 1);
@@ -75,7 +73,7 @@ class FileCommentSniff implements Sniff
 
 		if (isset($tokens[$commentStart]['comment_closer']) === false
 			|| ($tokens[$tokens[$commentStart]['comment_closer']]['content'] === ''
-				&& $tokens[$commentStart]['comment_closer'] === ($phpcsFile->numTokens - 1))
+			&& $tokens[$commentStart]['comment_closer'] === ($phpcsFile->numTokens - 1))
 		) {
 			// Don't process an unfinished file comment during live coding.
 			return ($phpcsFile->numTokens + 1);
@@ -173,7 +171,7 @@ class FileCommentSniff implements Sniff
 						$phpcsFile->fixer->replaceToken($string, $author);
 					}
 				}
-			} else if ($name === '@copyright') {
+			} elseif ($name === '@copyright') {
 				$pattern = '/^([0-9]{4}) ' . preg_quote($this->authorName) . '$/';
 				$copyright = date('Y') . ' ' . $this->authorName;
 				if (preg_match($pattern, $tokens[$string]['content']) === 0) {
@@ -212,7 +210,12 @@ class FileCommentSniff implements Sniff
 					($pos + 1),
 					$tag,
 				];
-				$phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)).'TagOrder', $data);
+				$phpcsFile->addError(
+					$error,
+					$tokens[$commentStart]['comment_tags'][$pos],
+					ucfirst(substr($tag, 1)).'TagOrder',
+					$data
+				);
 			}
 
 			$pos++;
@@ -222,6 +225,4 @@ class FileCommentSniff implements Sniff
 		return ($phpcsFile->numTokens + 1);
 
 	}//end process()
-
-
 }//end class
