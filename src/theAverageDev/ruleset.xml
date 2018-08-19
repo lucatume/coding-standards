@@ -115,4 +115,16 @@
             <property name="authorEmail" value="luca@theaveragedev.com"/>
         </properties>
     </rule>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Squiz.Commenting.BlockComment"/>
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.ClosingDeclarationComment"/>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+    <rule ref="Squiz.Commenting.InlineComment"/>
+    <rule ref="Squiz.Commenting.LongConditionClosingComment"/>
+    <rule ref="Squiz.Commenting.PostStatementComment"/>
+    <rule ref="Squiz.Commenting.VariableComment"/>
 </ruleset>
